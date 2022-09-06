@@ -19,6 +19,13 @@ builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
 builder.Services.AddScoped<IQuestionOptionRepository, QuestionOptionRepository>();
 builder.Services.AddScoped<IQuestionManager, QuestionManager>();
 
+
+using (var db = new AppDb())
+{
+    db.Database.EnsureCreated();
+    db.Initialize();
+}
+
 var app = builder.Build();
 
 app.UseExceptionHandler(e => e.Run(async context =>

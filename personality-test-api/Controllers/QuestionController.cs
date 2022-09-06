@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using personality_test_api.Models.Request;
 using personality_test_api.Services;
 
@@ -6,6 +7,7 @@ namespace personality_test_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class QuestionController : ControllerBase
     {
         private readonly IQuestionManager _questionManager;
@@ -15,6 +17,7 @@ namespace personality_test_api.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         [ProducesResponseType(typeof(IEnumerable<QuestionIO>), 200)]
         public IActionResult GetAll() => Ok(_questionManager.GetAllQuestions());
 
