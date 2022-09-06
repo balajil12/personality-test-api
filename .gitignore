@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/personality-test-api/obj
+/personality-test-api/bin
+/personality-test-api/.vs
