@@ -8,7 +8,6 @@ namespace personality_test_api.Db.Repositories
 
     public class QuestionOptionRepository : Repository<QuestionOption>, IQuestionOptionRepository
     {
-        private readonly AppDb _db;
         public QuestionOptionRepository(AppDb db): base(db)
         {
             _db = db;
