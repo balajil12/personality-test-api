@@ -9,7 +9,7 @@ namespace personality_test_api.Services
     public interface IQuestionManager
     {
         void AddQuestion(QuestionIO question);
-        void UpdateQuestion(QuestionIO question);
+        void UpdateQuestion(int questionId, QuestionIO question);
         void DeleteQuestion(int questionId);
         void DeleteOption(int questionId, int optionId);
         QuestionIO GetQuestionById(int questionId);
@@ -115,12 +115,12 @@ namespace personality_test_api.Services
             };
         }
 
-        public void UpdateQuestion(QuestionIO question)
+        public void UpdateQuestion(int questionId, QuestionIO question)
         {
             if (_questionRepository.Any(q => q.Description == question.Question && q.Id != question.Id))
                 throw new CustomBadRequest("Question must be unique");
 
-            var questionObj = _questionRepository.GetQuestionWithOptions(question.Id);
+            var questionObj = _questionRepository.GetQuestionWithOptions(questionId);
 
             if(questionObj ==null)
                 throw new CustomNotFound("Question not found");
