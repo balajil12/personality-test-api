@@ -17,7 +17,10 @@ builder.Services.AddEntityFrameworkSqlite().AddDbContext<AppDb>();
 
 builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
 builder.Services.AddScoped<IQuestionOptionRepository, QuestionOptionRepository>();
+builder.Services.AddScoped<ITestRepository, TestRepository>();
+builder.Services.AddScoped<ITestResultRepository, TestResultRepository>();
 builder.Services.AddScoped<IQuestionManager, QuestionManager>();
+builder.Services.AddScoped<ITestManager, TestManager>();
 
 
 using (var db = new AppDb())

@@ -16,11 +16,6 @@ namespace personality_test_api.Controllers
             _questionManager = questionManager;
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        [ProducesResponseType(typeof(IEnumerable<QuestionIO>), 200)]
-        public IActionResult GetAll() => Ok(_questionManager.GetAllQuestions());
-
         [HttpGet("{questionId}")]
         [ProducesResponseType(typeof(QuestionIO), 200)]
         public IActionResult GetById(int questionId) => Ok(_questionManager.GetQuestionById(questionId));

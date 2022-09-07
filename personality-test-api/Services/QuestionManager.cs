@@ -13,7 +13,7 @@ namespace personality_test_api.Services
         void DeleteQuestion(int questionId);
         void DeleteOption(int questionId, int optionId);
         QuestionIO GetQuestionById(int questionId);
-        IEnumerable<QuestionIO> GetAllQuestions();
+        IEnumerable<QuestionIO> GetAllQuestions(int testId);
     }
     public class QuestionManager : IQuestionManager
     {
@@ -80,9 +80,9 @@ namespace personality_test_api.Services
             _questionRepository.Commit();
         }
 
-        public IEnumerable<QuestionIO> GetAllQuestions()
+        public IEnumerable<QuestionIO> GetAllQuestions(int testId)
         {
-            return _questionRepository.GetAll().Select(q => new QuestionIO()
+            return _questionRepository.GetAllQuestionsWithOptions(testId).Select(q => new QuestionIO()
             {
                 Id = q.Id,
                 Question = q.Description,

@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace personality_test_api.Models.Entities
 {
-    [Table("Question")]
-    public class Question
+    [Table("Test")]
+    public class Test
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -12,12 +12,12 @@ namespace personality_test_api.Models.Entities
 
         [Column(TypeName = "VARCHAR")]
         [StringLength(250)]
+        public string Name { get; set; }
+
+        [Column(TypeName = "TEXT")]
         public string Description { get; set; }
 
-        [ForeignKey("TestId")]
-        public Test Test { get; set; }
-        public int TestId { get; set; }
-
-        public ICollection<QuestionOption> Options { get; set; }
+        public ICollection<Question> Questions { get; set; }
+        public ICollection<TestResult> Results { get; set; }
     }
 }

@@ -14,6 +14,8 @@ namespace personality_test_api.Models.Entities
         public Question Question { get; set; }
         public int QuestionId { get; set; }
 
+        [Column(TypeName = "VARCHAR")]
+        [StringLength(250)]
         public string OptionText { get; set; }
 
         /// <summary>

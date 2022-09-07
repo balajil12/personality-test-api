@@ -7,7 +7,7 @@ namespace personality_test_api.Db.Repositories
 
     public interface IQuestionRepository : IRepository<Question>
     {
-        IEnumerable<Question> GetAllQuestionsWithOptions();
+        IEnumerable<Question> GetAllQuestionsWithOptions(int testId);
         Question? GetQuestionWithOptions(int id);
     }
 
@@ -19,7 +19,10 @@ namespace personality_test_api.Db.Repositories
             _db = db;
         }
 
-        public IEnumerable<Question> GetAllQuestionsWithOptions() => _db.Questions.Include(q => q.Options).AsNoTracking();
+        public IEnumerable<Question> GetAllQuestionsWithOptions(int testId) 
+            => _db.Questions
+                .Include(q => q.Options)
+                .Where(q=> q.TestId == testId).AsNoTracking();
         public Question? GetQuestionWithOptions(int id) 
             => _db.Questions
                 .Include(q => q.Options)
