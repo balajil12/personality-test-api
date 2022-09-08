@@ -21,6 +21,7 @@ builder.Services.AddScoped<ITestRepository, TestRepository>();
 builder.Services.AddScoped<ITestResultRepository, TestResultRepository>();
 builder.Services.AddScoped<IQuestionManager, QuestionManager>();
 builder.Services.AddScoped<ITestManager, TestManager>();
+builder.Services.AddScoped<IResultManager, ResultManager>();
 
 
 using (var db = new AppDb())
@@ -53,6 +54,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(q => q.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.UseAuthorization();
 

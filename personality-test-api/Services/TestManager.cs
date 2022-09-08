@@ -7,6 +7,7 @@ namespace personality_test_api.Services
     public interface ITestManager
     {
         TestIO GetTestById(int testId);
+        IEnumerable<TestIO> GetAll();
     }
     public class TestManager : ITestManager
     {
@@ -33,6 +34,16 @@ namespace personality_test_api.Services
                 Id = test.Id,
                 Questions = _questionManager.GetAllQuestions(testId)
             };
+        }
+
+        public IEnumerable<TestIO> GetAll()
+        {
+            return _testRepository.GetAll().Select(q => new TestIO()
+            {
+                Description = q.Description,
+                Name = q.Name,
+                Id = q.Id
+            });
         }
     }
 }
