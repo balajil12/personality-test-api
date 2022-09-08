@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "de11a47a-7b5e-4076-9294-fa46b8b20ee2",
+		"name": "Personality-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19279028"
+	},
+	"item": [
+		{
+			"name": "GetAllTest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"should return atleast one\", function () {\r",
+							"    var list = pm.response.json();\r",
+							"    pm.expect(list.length).to.be.above(0);\r",
+							"    pm.environment.set(\"testId\",list[0].id);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/test",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetByTestId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"questions should not be empty\", function () {\r",
+							"    var test = pm.response.json();\r",
+							"    pm.environment.set(\"test\",test);\r",
+							"\r",
+							"    pm.expect(test.questions.length).to.be.above(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"options should not be empty\", function () {\r",
+							"    var test = pm.response.json();\r",
+							"\r",
+							"    pm.expect(test.questions[0].options.length).to.be.above(0);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/test/{{testId}}",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"test",
+						"{{testId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAnswers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/test/{{testId}}/result?answers=2&answers=7&answers=11&answers=16&answers=20",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"test",
+						"{{testId}}",
+						"result"
+					],
+					"query": [
+						{
+							"key": "answers",
+							"value": "2"
+						},
+						{
+							"key": "answers",
+							"value": "7"
+						},
+						{
+							"key": "answers",
+							"value": "11"
+						},
+						{
+							"key": "answers",
+							"value": "16"
+						},
+						{
+							"key": "answers",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "apiUrl",
+			"value": "https://localhost:7053/api",
+			"type": "string"
+		}
+	]
+}
