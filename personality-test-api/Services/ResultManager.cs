@@ -22,7 +22,7 @@ namespace personality_test_api.Services
         {
             var questions = _questionManager.GetAllQuestions(testId).ToList();
 
-            if (questions.Count != answers.Count || questions.Any(q => !q.Options.Any(r => answers.Contains(q.Id))))
+            if (questions.Count != answers.Count || questions.Any(q => !q.Options.Any(r => answers.Contains(r.Id))))
                 throw new CustomBadRequest("All questions are not asnwered");
 
             var optionsSelected = questions.Select(q => q.Options.Where(p => answers.Contains(p.Id)))
